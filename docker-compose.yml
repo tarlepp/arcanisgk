@@ -7,6 +7,8 @@ services:
       context: .
       dockerfile: ./Dockerfile
     command: php-fpm
+    depends_on:
+      - database
     volumes:
       - ./:/app
 
@@ -20,3 +22,19 @@ services:
       - php
     ports:
       - "8000:80"
+
+  database:
+    container_name: database
+    hostname: database
+    build:
+      context: ./docker/mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: some-database
+    ports:
+      - "33060:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+volumes:
+  mysqldata:
