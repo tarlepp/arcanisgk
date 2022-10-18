@@ -11,6 +11,7 @@ COPY --from=mlocati/php-extension-installer:1.5.42 /usr/bin/install-php-extensio
 
 # Enable all necessary PHP packages
 RUN install-php-extensions \
-    pdo_mysql
+    pdo_mysql \
+    imagick
 
 EXPOSE 9000
